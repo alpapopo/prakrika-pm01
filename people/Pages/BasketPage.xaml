@@ -1,0 +1,82 @@
+﻿<Page x:Class="people.Pages.BasketPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:people.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="BasketPage">
+
+    <Grid Background="#FF1F3447" Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Подборка пацаноу" FontFamily="Cambria Math" FontSize="22" Foreground="White" Margin="5"/>
+
+        <DataGrid x:Name="BasketGrid"
+                  Grid.Row="1"
+                  Margin="5,15,0,10"
+                  AutoGenerateColumns="False"
+                  IsReadOnly="True"
+                  CanUserAddRows="False"
+                  HeadersVisibility="Column"
+                  Background="White" FontFamily="Cambria Math">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Профиль" Width="*" Binding="{Binding ProductName}"/>
+                <DataGridTextColumn Header="Цена, ₽" Width="120" Binding="{Binding Price, StringFormat=N2}"/>
+                <DataGridTextColumn Header="Количество" Width="120" Binding="{Binding Quantity}"/>
+                <DataGridTextColumn Header="Сумма, ₽" Width="150" Binding="{Binding PositionTotal, StringFormat=N2}"/>
+                <DataGridTemplateColumn Header="Действие" Width="140">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Удалить"
+                                    Width="110"
+                                    Height="26"
+                                    FontFamily="Cambria Math"
+                                    Foreground="Black"
+                                    Background="#FF6FCF97"
+                                    Click="RemoveItemButton_Click"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <DockPanel Grid.Row="2" Margin="5">
+            <Button x:Name="GoToCatalogButton" Content="Вернуться в каталог"
+                    Width="190"
+                    Height="32"
+                    FontFamily="Cambria Math"
+                    Foreground="Black"
+                    Background="#FF6FCF97"
+                    Click="GoToCatalogButton_Click"
+                    DockPanel.Dock="Left"/>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <TextBlock x:Name="TotalTextBlock" FontFamily="Cambria Math" Foreground="White" VerticalAlignment="Center" Margin="0,0,20,0" FontSize="16"/>
+                <Button Content="Очистить подборку"
+                        Width="150"
+                        Height="32"
+                        Margin="0,0,10,0"
+                        FontFamily="Cambria Math"
+                        Foreground="Black"
+                        Background="#FF6FCF97"
+                        Click="ClearBasketButton_Click"/>
+                <Button Content="Оформить заявку"
+                        Width="150"
+                        Height="32"
+                        FontFamily="Cambria Math"
+                        Foreground="Black"
+                        Background="#FF6FCF97"
+                        Click="CheckoutButton_Click"/>
+            </StackPanel>
+        </DockPanel>
+    </Grid>
+</Page>
+
+
+
